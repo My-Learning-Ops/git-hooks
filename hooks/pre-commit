@@ -6,11 +6,37 @@ for file in $STAGED_FILES; do
 	echo "Checking: $file"
 done
 
+# Cancel commit if no staged files
+if [ -z "$STAGED_FILES" ]; then
+	echo "Error: Cannot make a commit if no files are staged."
+	exit 1
+fi
 
 
 
 
 
+# Task 1: Prevent Commits with Empty Staged Area
+# Goal: Cancel the commit if no files are staged.
+# Helps reinforce understanding of checking staging status using git diff --cached.
+
+
+# Task 2: Block Commits with TODO Comments
+# Goal: If any staged file contains the word TODO, cancel the commit and print a warning.
+# Gets you comfortable reading staged file content and basic string searching.
+
+
+# Task 3: Disallow Certain File Types
+# Goal: Prevent committing files with extensions like .log, .tmp, or .bak.
+# Helps you practice filtering staged files and using pattern matching.
+
+# Task 4: Enforce Lowercase File Names
+# Goal: Block the commit if any staged file contains uppercase letters in the name.
+# Introduces basic filename validation and shell string manipulation.
+
+# Task 5: Check for Blank Commit Messages
+# Goal: Cancel the commit if the message is empty or just whitespace.
+# This is normally a commit-msg hook task, but trying it here helps you understand how hooks interact and work with files passed as arguments.
 
 
 
