@@ -9,6 +9,7 @@
 
 STAGED_FILES=$(git diff --cached --name-only)
 BLOCKED_FILES="\.env$|\.log$|\.tmp$|\.bak$"
+REGEX="[A-Z]+"
 
 for file in $STAGED_FILES; do
 	echo "Checking: $file"
@@ -34,6 +35,12 @@ if echo "$STAGED_FILES" | grep -Eq "$BLOCKED_FILES"; then
 	exit 1
 fi
 
+# Block the commit if any staged file contains uppercase letters in the name
+if echo "$STAGED_FILES" | grep -Eq "$REGEX"; then
+	echo "Error: Commit blocked due to forbidden file names being staged."
+	exit 1
+fi
+
 echo "Commit Validated. Commit made."
 exit 0
 
@@ -44,10 +51,6 @@ exit 0
 
 
 
-
-# Task 3: Disallow Certain File Types
-# Goal: Prevent committing files with extensions like .log, .tmp, or .bak.
-# Helps you practice filtering staged files and using pattern matching.
 
 # Task 4: Enforce Lowercase File Names
 # Goal: Block the commit if any staged file contains uppercase letters in the name.
